@@ -1,6 +1,6 @@
 controller:
   service:
-    type: NodePort
+    type: LoadBalancer
   replicaCount: 2
   nodeSelector: {}
   tolerations: []

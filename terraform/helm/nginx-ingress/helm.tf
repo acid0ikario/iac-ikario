@@ -23,3 +23,10 @@ resource "helm_release" "nginx_ingress" {
     value = var.https_node_port
   }
 }
+
+data "kubernetes_service" "nginx_ingress" {
+  metadata {
+    name      = "nginx-ingress-controller"  # Ajusta el nombre del servicio según tu configuración
+    namespace = var.namespace            # Ajusta el namespace según sea necesario
+  }
+}

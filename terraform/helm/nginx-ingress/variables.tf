@@ -7,7 +7,7 @@ variable "namespace" {
 variable "service_type" {
   description = "Type of service for the ingress controller"
   type        = string
-  default     = "NodePort"
+  default     = "LoadBalancer"
 }
 
 variable "http_node_port" {

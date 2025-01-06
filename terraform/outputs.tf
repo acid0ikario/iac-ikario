@@ -12,3 +12,7 @@
 #   description = "IP del servicio Nginx"
 #   value       = module.nginx.service_ip
 # }
+output "nginx_external_ip" {
+  description = "External IP of the NGINX Ingress controller"
+  value       = module.nginx_ingress.external_ip
+}

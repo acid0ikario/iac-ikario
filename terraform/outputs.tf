@@ -8,7 +8,7 @@
 #   value       = module.deployment_example.deployment_name
 # }
 
-output "nginx_service_ip" {
-  description = "IP del servicio Nginx"
-  value       = module.nginx.service_ip
-}
+# output "nginx_service_ip" {
+#   description = "IP del servicio Nginx"
+#   value       = module.nginx.service_ip
+# }

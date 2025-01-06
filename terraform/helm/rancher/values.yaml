@@ -1,0 +1,9 @@
+replicas: 3
+ingress:
+  enabled: true
+  hostname: "rancher.my-cluster.local"
+  tls:
+    source: letsEncrypt
+  ingressClassName: "nginx"  # Añade esta línea
+  extraAnnotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"

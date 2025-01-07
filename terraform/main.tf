@@ -7,7 +7,7 @@ module "namespace" {
 }
 
 ###################################
-# NGINX Ingress
+# NGINX Ingress Controller
 ###################################
 module "nginx_ingress" {
   source     = "./helm/nginx-ingress"

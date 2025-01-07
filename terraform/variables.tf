@@ -20,5 +20,11 @@ variable "nginx_replicas" {
 variable "nginx_service_type" {
   description = "Tipo de servicio para Nginx"
   type        = string
-  default     = "LoadBalancer"
+  default     = "NodePort"
+}
+
+variable "email" {
+  description = "email"
+  type        = string
+  default     = "1mm.villanueva1@gmail.com"
 }

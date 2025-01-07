@@ -1,6 +1,17 @@
 controller:
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
   service:
-    type: LoadBalancer
+    type: NodePort
+  admissionWebhooks:
+    enabled: false
+  ingressClassResource:
+    default: true
   replicaCount: 2
   nodeSelector: {}
   tolerations: []

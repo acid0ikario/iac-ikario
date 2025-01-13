@@ -22,29 +22,6 @@ module "cert_manager" {
   # Podrías usar variables si quieres, pero con los defaults está bien.
 }
 
-resource "null_resource" "wait_for_cert_manager_crds" {
-  depends_on = [
-    module.cert_manager.helm_release_id
-  ]
-
-  provisioner "local-exec" {
-    command = <<-EOT
-      echo "Esperando a que los CRDs de cert-manager se registren..."
-      for i in {1..20}; do
-        # Revisa uno de los CRDs, por ejemplo clusterissuers.cert-manager.io
-        if kubectl get crd clusterissuers.cert-manager.io &>/dev/null; then
-          echo "CRDs de cert-manager encontrados."
-          exit 0
-        fi
-        echo "CRDs aún no disponibles, durmiendo 5s..."
-        sleep 5
-      done
-      echo "ERROR: Se agotó el tiempo esperando CRDs de cert-manager."
-      exit 1
-    EOT
-  }
-}
-
 
 ###################################
 # Cluster Issuer
@@ -56,11 +33,6 @@ module "cluster_issuer" {
   private_key_secret_name = "letsencrypt-production"
   ingress_class           = "nginx"
   issuer_name             = "letsencrypt-production"
-
-  depends_on = [
-    module.cert_manager.helm_release_id,
-    null_resource.wait_for_cert_manager_crds
-  ]
 }
 
 

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gitlab-ingress
+  namespace: gitlab
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    # Si prefieres que cert-manager haga auto-discovery del issuer en lugar de usar un Certificate
+    # se podría usar: cert-manager.io/cluster-issuer: "letsencrypt-production"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  tls:
+  - hosts:
+    - gitlab.my-cluster.local
+    secretName: gitlab-tls-secret
+  rules:
+  - host: gitlab.my-cluster.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gitlab
+            port:
+              number: 80
